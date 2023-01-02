@@ -28,6 +28,7 @@ public class SupplyChain extends Application {
     Button globalLoginButton = new Button("Log In");
     Label customerEmailLabel = null;
 
+
     String customerEmail = null;
     private GridPane loginPage(){
         Label emailLabel = new Label("Email");
@@ -117,7 +118,7 @@ public class SupplyChain extends Application {
     private GridPane footerBar(){
         Button addToCart = new Button("Add to cart");
         Button buyNowButton = new Button("Buy Now");
-
+        Label messageLabel = new Label("");
 
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(bodyPane.getMinWidth(),bodyPane.getMaxHeight());
@@ -130,14 +131,18 @@ public class SupplyChain extends Application {
 
         gridPane.add(addToCart,0,0);
         gridPane.add(buyNowButton,1,0);
-
-        Label messageLabel = new Label("Done");
+        gridPane.add(messageLabel, 2, 0);
+       // Label messageLabel = new Label("Done");
     buyNowButton.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent actionEvent) {
             Product selectedProduct = productDetails.getSelectedProduct();
             if(Order.placeOrder(customerEmail,selectedProduct)){
+                messageLabel.setText("Ordered");
 
+            }
+            else {
+                messageLabel.setText("Order Failed");
             }
 
         }
